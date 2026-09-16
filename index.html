@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>File Upload System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:
+                radial-gradient(circle at top left, #6a5acd, transparent 35%),
+                radial-gradient(circle at bottom right, #00c6ff, transparent 35%),
+                #0f172a;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .upload-card {
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 25px;
+
+            padding: 40px;
+            text-align: center;
+
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.35);
+
+            animation: fadeIn 0.7s ease;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #7c3aed,
+                #06b6d4
+            );
+
+            font-size: 38px;
+
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+        }
+
+        h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #cbd5e1;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        .upload-area {
+            /* border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 18px; */
+            padding: 35px 10px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .upload-area:hover {
+            border-color: #22d3ee;
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .upload-area span {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .upload-area small {
+            color: #94a3b8;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-name {
+            min-height: 22px;
+            margin: 10px 0 20px;
+            color: #67e8f9;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+
+            border: none;
+            border-radius: 14px;
+
+            background: linear-gradient(
+                135deg,
+                #7c3aed,
+                #06b6d4
+            );
+
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.3s ease;
+
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.25);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(6, 182, 212, 0.35);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .footer {
+            margin-top: 25px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .upload-card {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="upload-card">
+
+            <div class="icon">
+                ☁️
+            </div>
+
+            <h1>File Upload System</h1>
+
+            <p class="subtitle">
+                Upload your image securely to the server
+            </p>
+
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+
+                <label class="upload-area" for="image">
+
+                    <span>📁 Choose an image</span>
+
+                    <small>
+                        JPG, JPEG, PNG, WEBP supported
+                    </small>
+
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/*"
+                        required
+                    >
+
+                </label>
+
+                <div class="file-name" id="fileName">
+                    No file selected
+                </div>
+
+                <button type="submit" id="uploadBtn">
+                    🚀 Upload Image
+                </button>
+
+            </form>
+
+            <div class="footer">
+                Your file will be processed securely.
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const fileInput = document.getElementById("image");
+        const fileName = document.getElementById("fileName");
+
+        fileInput.addEventListener("change", () => {
+
+            if (fileInput.files.length > 0) {
+
+                fileName.textContent =
+                    "Selected: " + fileInput.files[0].name;
+
+            } else {
+
+                fileName.textContent = "No file selected";
+
+            }
+        });
+    </script>
+
+</body>
+</html>
+
